@@ -1768,6 +1768,22 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
     return blockValue * 0.7;
 }
 
+bool IsMasternodeCollateral(CAmount value)
+{
+    if (chainActive.nHeight() < 165000()) {
+        return value == DEFAULT_PRIVATESEND_AMOUNT;
+
+    } else {
+        if (value == DEFAULT_PRIVATESEND_AMOUNT) {
+            return true;
+        } else if (value == DEFAULT_PRIVATESEND_AMOUNT_NEW) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 CAmount GetFounderPayment(int nHeight, CAmount blockValue)
 {
     if (nHeight < 165000){
