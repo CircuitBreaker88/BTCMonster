@@ -1770,7 +1770,7 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 
 bool IsMasternodeCollateral(CAmount value)
 {
-    if (chainActive.Height() < 165000(){
+    if (chainActive.Height() < 165000){
         return value == DEFAULT_PRIVATESEND_AMOUNT;
 
     } else {
