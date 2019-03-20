@@ -210,7 +210,7 @@ void CActiveMasternode::ManageStateInitial()
         return;
     }
 
-    if(pwalletMain->GetBalance() < IsMasternodeCollateral{
+    if(pwalletMain->GetBalance() < IsMasternodeCollateral){
         LogPrintf("CActiveMasternode::ManageStateInitial -- %s: Wallet balance is < 1000 MON\n", GetStateString());
         return;
     }
