@@ -17,10 +17,10 @@
 #include <boost/foreach.hpp>
 
 CAmount FounderPayment::getFounderPaymentAmount(int blockHeight, CAmount blockReward) {
-	 if (blockHeight < 1160){
+	 if (blockHeight < 165000){
 		 return 0;
 	 }
-	 return blockReward * 0.01;
+	 return blockReward * 0.05;
 }
 
 void FounderPayment::FillFounderPayment(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, CTxOut& txoutFounderRet) {

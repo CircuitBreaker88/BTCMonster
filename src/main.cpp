@@ -1784,9 +1784,9 @@ bool IsMasternodeCollateral(CAmount value)
     }
 }
 
-CAmount GetFounderPayment(int nHeight, CAmount blockValue)
+CAmount FounderPayment::getFounderPaymentAmount(int nHeight, CAmount blockValue)
 {
-    if (nHeight < 165000){
+    if (nHeight <= 165000){
         return 0;
     }
     return blockValue * 0.05;
@@ -3756,11 +3756,20 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     // END MON
 
     // Check transactions
-    BOOST_FOREACH(const CTransaction& tx, block.vtx)
-        if (!CheckTransaction(tx, state))
+    bool founderTransaction = true;
+   FounderPayment founderPayment;
+    BOOST_FOREACH(const CTransaction& tx, block.vtx) {
+        if (!CheckTransaction(tx, state)){
             return error("CheckBlock(): CheckTransaction of %s failed with %s",
                 tx.GetHash().ToString(),
                 FormatStateMessage(state));
+}
+   }
+   if(!founderTransaction) {
+     LogPrintf("CMasternodePayments::IsBlockPayeeValid -- Founder payment of %s is not found\n", block.txoutFounder.ToString().c_str());
+     return state.DoS(0, error("CheckBlock(TANK): transaction %s does not contains founder transaction",
+     block.txoutFounder.GetHash().ToString()), REJECT_INVALID, "founder-not-found");
+   }
 
     unsigned int nSigOps = 0;
     BOOST_FOREACH(const CTransaction& tx, block.vtx)
