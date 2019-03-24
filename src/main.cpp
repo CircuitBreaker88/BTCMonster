@@ -1779,7 +1779,6 @@ bool IsMasternodeCollateral(CAmount value)
             return false;
         }
     }
-}
 
 CAmount FounderPayment::getFounderPaymentAmount(int nHeight, CAmount blockValue)
 {
