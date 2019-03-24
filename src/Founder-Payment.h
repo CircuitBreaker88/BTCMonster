@@ -27,7 +27,7 @@ public:
 	}
 	~FounderPayment(){};
 	CAmount getFounderPaymentAmount(int blockHeight, CAmount blockReward);
-	void FounderPayment::FillFounderPayment(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, CTxOut& txoutFounderRet);
+	void FillFounderPayment(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, CTxOut& txoutFounderRet);
 	bool IsBlockPayeeValid(const CTransaction& txNew, const int height, const CAmount blockReward);
 private:
 	CBitcoinAddress founderAddress;
