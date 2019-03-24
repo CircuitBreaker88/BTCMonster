@@ -3761,6 +3761,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
             return error("CheckBlock(): CheckTransaction of %s failed with %s",
                 tx.GetHash().ToString(),
                 FormatStateMessage(state));
+              }
    }
    if(!founderTransaction) {
      LogPrintf("CMasternodePayments::IsBlockPayeeValid -- Founder payment of %s is not found\n", block.txoutFounder.ToString().c_str());
