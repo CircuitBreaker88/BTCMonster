@@ -1773,11 +1773,8 @@ bool IsMasternodeCollateral(CAmount value)
     if (chainActive.Height() < 165000){
         return value == DEFAULT_PRIVATESEND_AMOUNT;
 
-    } else {
-        if (value == DEFAULT_PRIVATESEND_AMOUNT) {
-            return true;
-        } else if (value == DEFAULT_PRIVATESEND_AMOUNT_NEW) {
-            return true;
+    } else if (chainActive.Height() >= 165000) {
+            return value == DEFAULT_PRIVATESEND_AMOUNT_NEW;
         } else {
             return false;
         }
@@ -1786,7 +1783,7 @@ bool IsMasternodeCollateral(CAmount value)
 
 CAmount FounderPayment::getFounderPaymentAmount(int nHeight, CAmount blockValue)
 {
-    if (nHeight <= 165000){
+    if (nHeight < 165000){
         return 0;
     }
     return blockValue * 0.05;
@@ -3758,12 +3755,13 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     // Check transactions
     bool founderTransaction = true;
    FounderPayment founderPayment;
+   int height = chainActive.Height();
+   CAmount blockReward = GetBlockSubsidy(chainActive.Tip()->nBits, height, Params().GetConsensus());
     BOOST_FOREACH(const CTransaction& tx, block.vtx) {
         if (!CheckTransaction(tx, state)){
             return error("CheckBlock(): CheckTransaction of %s failed with %s",
                 tx.GetHash().ToString(),
                 FormatStateMessage(state));
-}
    }
    if(!founderTransaction) {
      LogPrintf("CMasternodePayments::IsBlockPayeeValid -- Founder payment of %s is not found\n", block.txoutFounder.ToString().c_str());
