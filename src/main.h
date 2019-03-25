@@ -20,7 +20,7 @@
 #include "sync.h"
 #include "versionbits.h"
 #include "spentindex.h"
-#include "Founder-Payment.h"
+#include "FounderPayment.h"
 
 #include <algorithm>
 #include <exception>
