@@ -9,22 +9,22 @@
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
 /* Version Build */
-#define CLIENT_VERSION_BUILD 3
+#define CLIENT_VERSION_BUILD 0
 
 /* Version is release */
 #define CLIENT_VERSION_IS_RELEASE true
 
 /* Major version */
-#define CLIENT_VERSION_MAJOR 0
+#define CLIENT_VERSION_MAJOR 2
 
 /* Minor version */
-#define CLIENT_VERSION_MINOR 12
+#define CLIENT_VERSION_MINOR 0
 
 /* Build revision */
-#define CLIENT_VERSION_REVISION 1
+#define CLIENT_VERSION_REVISION 0
 
 /* Version is release */
-#define COPYRIGHT_YEAR 2017
+#define COPYRIGHT_YEAR 2019
 
 /* Define to 1 to enable wallet functions */
 #define ENABLE_WALLET 1
