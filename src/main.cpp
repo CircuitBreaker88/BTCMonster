@@ -1781,14 +1781,6 @@ bool IsMasternodeCollateral(CAmount value)
         }
     }
 
-CAmount FounderPayment::getFounderPaymentAmount(int nHeight, CAmount blockValue)
-{
-    if (nHeight < 165000){
-        return 0;
-    }
-    return blockValue * 0.05;
-}
-
 bool IsInitialBlockDownload()
 {
     static bool lockIBDState = false;
