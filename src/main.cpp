@@ -2520,7 +2520,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     int64_t nTimeStart = GetTimeMicros();
     const int nPrevHeight = pindex->pprev == NULL ? 0 : pindex->pprev->nHeight;
     // Check it again in case a previous version let a bad block in
-    if (!CheckBlock(block, state, nPrevHeight, !fJustCheck, !fJustCheck))
+    if (!CheckBlock(block, state, nPrevHeight, !fJustCheck))
         return false;
 
     // verify that the view's current state corresponds to the previous block
@@ -3747,7 +3747,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, int prevBlockHeigh
     // Check transactions
     bool founderTransaction = false;
     CAmount blockReward = GetBlockSubsidy(0, prevBlockHeight, Params().GetConsensus(), false);
-    //const CAmount founderReward = founderPayment.getFounderPaymentAmount(prevBlockHeight, blockReward);
+    const CAmount founderReward = founderPayment.getFounderPaymentAmount(prevBlockHeight, blockReward);
     BOOST_FOREACH(const CTransaction& tx, block.vtx) {
         if (!CheckTransaction(tx, state)) {
             return error("CheckBlock(): CheckTransaction of %s failed with %s",
@@ -3756,9 +3756,9 @@ bool CheckBlock(const CBlock& block, CValidationState& state, int prevBlockHeigh
               }
                 if(sporkManager.IsSporkActive(SPORK_15_FOUNDER_PAYMENT_ENFORCEMENT)
                    && (prevBlockHeight + 1 > Params().GetConsensus().nFounderPaymentsStartBlock)) {
-                //	printf("founder block %d=%lld", prevBlockHeight);
+                	printf("founder block %d=%lld", prevBlockHeight);
                 	if(founderPayment.IsBlockPayeeValid(tx,prevBlockHeight+1,blockReward)) {
-                	//	printf("founder found on block %d", prevBlockHeight);
+                		printf("founder found on block %d", prevBlockHeight);
                 		founderTransaction = true;
                 		break;
                 	}
@@ -4011,7 +4011,8 @@ static bool IsSuperMajority(int minVersion, const CBlockIndex* pstart, unsigned 
 bool ProcessNewBlock(CValidationState& state, const CChainParams& chainparams, const CNode* pfrom, const CBlock* pblock, bool fForceProcessing, CDiskBlockPos* dbp)
 {
     // Preliminary checks
-    bool checked = CheckBlock(*pblock, state);
+    const int height = chainActive.Height();
+    bool checked = CheckBlock(*pblock, state, height);
 
     {
         LOCK(cs_main);
