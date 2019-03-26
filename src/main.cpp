@@ -3673,7 +3673,7 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool f
     return true;
 }
 
-bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bool fCheckMerkleRoot)
+bool CheckBlock(const CBlock& block, CValidationState& state, int prevBlockHeight, bool fCheckPOW, bool fCheckMerkleRoot)
 {
     // These are checks that are independent of context.
 
@@ -3764,9 +3764,9 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
               }
                 if(sporkManager.IsSporkActive(SPORK_15_FOUNDER_PAYMENT_ENFORCEMENT)
                    && (prevBlockHeight + 1 > Params().GetConsensus().nFounderPaymentsStartBlock)) {
-                	//printf("founder block %d=%lld", prevBlockHeight);
+                	printf("founder block %d=%lld", prevBlockHeight);
                 	if(founderPayment.IsBlockPayeeValid(tx,prevBlockHeight+1,blockReward)) {
-                		//printf("founder found on block %d", prevBlockHeight);
+                		printf("founder found on block %d", prevBlockHeight);
                 		founderTransaction = true;
                 		break;
                 	}
@@ -3776,7 +3776,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
             }
             if(!founderTransaction) {
             	LogPrintf("CheckBlock() -- Founder payment of %s is not found\n", block.txoutFounder.ToString().c_str());
-            	return state.DoS(0, error("CheckBlock(XGALAXY): transaction %s does not contains founder transaction",
+            	return state.DoS(0, error("CheckBlock(MON): transaction %s does not contains founder transaction",
             			block.txoutFounder.GetHash().ToString()), REJECT_INVALID, "founder-not-found");
             }
 
