@@ -1771,10 +1771,10 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 
 bool IsMasternodeCollateral(CAmount value)
 {
-    if (chainActive.Height() < 165000){
+    if (chainActive.Height() < 166250){
         return value == DEFAULT_PRIVATESEND_AMOUNT;
 
-    } else if (chainActive.Height() >= 165000) {
+    } else if (chainActive.Height() >= 166250) {
             return value == DEFAULT_PRIVATESEND_AMOUNT_NEW;
         } else {
             return false;
@@ -2520,7 +2520,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     int64_t nTimeStart = GetTimeMicros();
     const int nPrevHeight = pindex->pprev == NULL ? 0 : pindex->pprev->nHeight;
     // Check it again in case a previous version let a bad block in
-    if (!CheckBlock(block, state, nPrevHeight, !fJustCheck))
+    if (!CheckBlock(block, state, nPrevHeight, !fJustCheck, !fJustCheck))
         return false;
 
     // verify that the view's current state corresponds to the previous block
@@ -3962,7 +3962,7 @@ static bool AcceptBlock(const CBlock& block, CValidationState& state, const CCha
         if (fTooFarAhead) return true;      // Block height is too high
     }
     const int nPrevHeight = pindex->pprev == NULL ? 0 : pindex->pprev->nHeight;
-    if ((!CheckBlock(block, state, nPrevHeight)) || !ContextualCheckBlock(block, state, pindex->pprev)) {
+    if ((!CheckBlock(block, state,nPrevHeight)) || !ContextualCheckBlock(block, state, pindex->pprev)) {
         if (state.IsInvalid() && !state.CorruptionPossible()) {
             pindex->nStatus |= BLOCK_FAILED_VALID;
             setDirtyBlockIndex.insert(pindex);
