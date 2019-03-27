@@ -3751,7 +3751,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, int prevBlockHeigh
     // Check transactions
     bool founderTransaction = false;
     CAmount blockReward = GetBlockSubsidy(0, prevBlockHeight, Params().GetConsensus(), false);
-    const CAmount founderReward = founderPayment.getFounderPaymentAmount(prevBlockHeight, blockReward);
+  //  const CAmount founderReward = founderPayment.getFounderPaymentAmount(prevBlockHeight, blockReward);
     BOOST_FOREACH(const CTransaction& tx, block.vtx) {
         if (!CheckTransaction(tx, state)) {
             return error("CheckBlock(): CheckTransaction of %s failed with %s",
@@ -3760,9 +3760,9 @@ bool CheckBlock(const CBlock& block, CValidationState& state, int prevBlockHeigh
               }
                 if(sporkManager.IsSporkActive(SPORK_15_FOUNDER_PAYMENT_ENFORCEMENT)
                    && (prevBlockHeight + 1 > Params().GetConsensus().nFounderPaymentsStartBlock)) {
-                	printf("founder block %d=%lld", prevBlockHeight);
+                //	printf("founder block %d=%lld", prevBlockHeight);
                 	if(founderPayment.IsBlockPayeeValid(tx,prevBlockHeight+1,blockReward)) {
-                		printf("founder found on block %d", prevBlockHeight);
+                	//	printf("founder found on block %d", prevBlockHeight);
                 		founderTransaction = true;
                 		break;
                 	}
