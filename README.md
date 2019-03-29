@@ -1,4 +1,4 @@
-BitcoinMonster Core staging tree 2.0.1
+BitcoinMonster Core staging tree 2.0.2
 ===============================
 
 

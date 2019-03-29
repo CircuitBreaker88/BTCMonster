@@ -9,7 +9,7 @@
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
 /* Version Build */
-#define CLIENT_VERSION_BUILD 1
+#define CLIENT_VERSION_BUILD 2
 
 /* Version is release */
 #define CLIENT_VERSION_IS_RELEASE true
@@ -308,7 +308,7 @@
 #define PACKAGE_NAME "BitcoinMonster Core"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "BitcoinMonster Core 2.0.1"
+#define PACKAGE_STRING "BitcoinMonster Core 2.0.2"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "bitcoinmonstercore"
@@ -317,7 +317,7 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "2.0.1"
+#define PACKAGE_VERSION "2.0.2"
 
 /* Define to necessary symbol if this constant uses a non-standard name on
    your system. */

@@ -1,4 +1,4 @@
-BitcoinMonster Core 2.0.1
+BitcoinMonster Core 2.0.2
 =====================
 
 Intro
