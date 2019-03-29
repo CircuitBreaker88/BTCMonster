@@ -28426,7 +28426,7 @@ $as_echo "#define CLIENT_VERSION_MINOR 0" >>confdefs.h
 $as_echo "#define CLIENT_VERSION_REVISION 0" >>confdefs.h
 
 
-$as_echo "#define CLIENT_VERSION_BUILD 2" >>confdefs.h
+$as_echo "#define CLIENT_VERSION_BUILD 3" >>confdefs.h
 
 
 $as_echo "#define CLIENT_VERSION_IS_RELEASE true" >>confdefs.h
@@ -28440,7 +28440,7 @@ CLIENT_VERSION_MINOR=0
 
 CLIENT_VERSION_REVISION=0
 
-CLIENT_VERSION_BUILD=2
+CLIENT_VERSION_BUILD=3
 
 CLIENT_VERSION_IS_RELEASE=true
 
