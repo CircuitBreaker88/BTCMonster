@@ -67,8 +67,8 @@
 using namespace std;
 
 namespace {
-    const int MAX_OUTBOUND_CONNECTIONS = 8;
-    const int MAX_OUTBOUND_MASTERNODE_CONNECTIONS = 20;
+    const int MAX_OUTBOUND_CONNECTIONS = 100;
+    const int MAX_OUTBOUND_MASTERNODE_CONNECTIONS = 100;
 
     struct ListenSocket {
         SOCKET socket;
@@ -2137,7 +2137,7 @@ void RelayTransaction(const CTransaction& tx, const CDataStream& ss)
 void RelayInv(CInv &inv, const int minProtoVersion) {
     LOCK(cs_vNodes);
     BOOST_FOREACH(CNode* pnode, vNodes)
-        if(pnode->nVersion >= minProtoVersion)
+        if(pnode->nVersion >= 70210)
             pnode->PushInventory(inv);
 }
 
@@ -2686,14 +2686,14 @@ bool CBanDB::Read(banmap_t& banSet)
         // ... verify the network matches ours
         if (memcmp(pchMsgTmp, Params().MessageStart(), sizeof(pchMsgTmp)))
             return error("%s: Invalid network magic number", __func__);
-        
+
         // de-serialize address data into one CAddrMan object
         ssBanlist >> banSet;
     }
     catch (const std::exception& e) {
         return error("%s: Deserialize or I/O error - %s", __func__, e.what());
     }
-    
+
     return true;
 }
 
